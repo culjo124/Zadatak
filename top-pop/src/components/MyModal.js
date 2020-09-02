@@ -24,7 +24,7 @@ function getModalStyle() {
   };
 }
 
-function MyModal(props) {
+export default function MyModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
@@ -77,4 +77,3 @@ function MyModal(props) {
   );
 }
 
-export default MyModal;

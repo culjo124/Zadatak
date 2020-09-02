@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -9,7 +9,6 @@ import Button from "@material-ui/core/Button";
 import MyModal from "./MyModal";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MusicNoteSharpIcon from "@material-ui/icons/MusicNoteSharp";
-import { Context } from "./App";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home() {
+function Home(props) {
   const classes = useStyles();
-  const value = useContext(Context);
+  console.log(props)
 
   return (
     <div>
-      {!value.state.isApiLoading ? (
+      {!props.state.isApiLoading ? (
         <div>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -49,13 +48,19 @@ function Home() {
                 color="primary"
                 aria-label="outlined primary button group"
               >
-                <Button onClick={value.sortAsc}>Sort ascending</Button>
-                <Button onClick={value.sortDes}>Sort descending</Button>
+                <Button onClick={() => {
+                  console.log(props.state)
+                  props.sortAsc()
+                }}>Sort ascending</Button>
+                <Button onClick={() => {
+                  console.log(props.state)
+                  props.sortDes()
+                }}>Sort descending</Button>
               </ButtonGroup>
             </div>
           </Container>
           <Grid container spacing={1} style={{ padding: 24 }}>
-            {value.state.songs.map((currentSong) => (
+            {props.state.songs.map((currentSong) => (
               <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
                 <MyModal song={currentSong} />
               </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -6,9 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import MyModal from "./MyModal";
+import MyModal from "../components/MyModal";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MusicNoteSharpIcon from "@material-ui/icons/MusicNoteSharp";
+import * as actions from "../actions"
+import { useSelector, useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,13 +28,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home(props) {
+function Home() {
   const classes = useStyles();
-  console.log(props)
+
+  const dispatch = useDispatch();
+
+  const localActions = {
+    sortAsc: () => dispatch(actions.song.sortAsc()),
+    sortDes: () => dispatch(actions.song.sortDes()),
+    getSongs: () => dispatch(actions.song.getSongs()),
+
+  };
+
+  const globalState = {
+    songs: useSelector(state => state.song.songs),
+    isApiLoading: useSelector(state => state.song.isApiLoading)
+  };
+
+  useEffect(() => {
+    localActions.getSongs();
+  }, []);
 
   return (
     <div>
-      {!props.state.isApiLoading ? (
+      {!globalState.isApiLoading ? (
         <div>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -49,18 +68,18 @@ function Home(props) {
                 aria-label="outlined primary button group"
               >
                 <Button onClick={() => {
-                  console.log(props.state)
-                  props.sortAsc()
+                  console.log(globalState.songs)
+                  localActions.sortAsc()
                 }}>Sort ascending</Button>
                 <Button onClick={() => {
-                  console.log(props.state)
-                  props.sortDes()
+                  console.log(globalState.songs)
+                  localActions.sortDes()
                 }}>Sort descending</Button>
               </ButtonGroup>
             </div>
           </Container>
           <Grid container spacing={1} style={{ padding: 24 }}>
-            {props.state.songs.map((currentSong) => (
+            {globalState.songs.map((currentSong) => (
               <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
                 <MyModal song={currentSong} />
               </Grid>

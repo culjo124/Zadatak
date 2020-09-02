@@ -25,7 +25,6 @@ function App() {
   }, []);
 
   const sortAsc = () => {
-    console.log(localActions.sortAsc)
     localActions.sortAsc()
   }
 

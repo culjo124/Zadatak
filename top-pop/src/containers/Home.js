@@ -11,6 +11,8 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MusicNoteSharpIcon from "@material-ui/icons/MusicNoteSharp";
 import * as actions from "../actions"
 import { useSelector, useDispatch } from "react-redux"
+import Loader from "../components/loader"
+import Footer from "../components/footer"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -68,11 +70,9 @@ function Home() {
                 aria-label="outlined primary button group"
               >
                 <Button onClick={() => {
-                  console.log(globalState.songs)
                   localActions.sortAsc()
                 }}>Sort ascending</Button>
                 <Button onClick={() => {
-                  console.log(globalState.songs)
                   localActions.sortDes()
                 }}>Sort descending</Button>
               </ButtonGroup>
@@ -87,8 +87,9 @@ function Home() {
           </Grid>
         </div>
       ) : (
-          "Loading..."
+          <Loader />
         )}
+      <Footer />
     </div>
   );
 }

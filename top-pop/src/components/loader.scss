@@ -1,0 +1,45 @@
+.container{
+    display:flex;
+    width: 600px;
+  }
+
+.container div{
+  border:1px #ccc solid;
+  padding:10px;
+}
+
+.box{
+  flex:1;
+}
+
+@media(max-width:426px){
+    .container{
+      display:flex;
+      width: 300px;
+    }
+  
+  .container div{
+    border:1px #ccc solid;
+    padding:10px;
+  }
+  
+  .box{
+    flex:1;
+  }
+}
+
+@media(min-width:1024px){
+    .container{
+      display:flex;
+      width: 1000px;
+    }
+  
+  .container div{
+    border:1px #ccc solid;
+    padding:10px;
+  }
+  
+  .box{
+    flex:1;
+  }
+}

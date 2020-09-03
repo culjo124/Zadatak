@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <div className="container-1">
             <div className="box-1">
-                <p>Date: {date}{'.'}{month}{'.'}{year}</p>
+                <p>Date: {date < 10 ? `0${date}` : { date }}{'.'}{month < 10 ? `0${month}` : { month }}{'.'}{year}</p>
                 <p>Contact: 095 118 0022</p>
             </div>
             <div className="box-2">

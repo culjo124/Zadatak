@@ -13,6 +13,7 @@ import * as actions from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/loader";
 import Footer from "../components/footer";
+import "./home.scss";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     alignItems: "center",
-  },
+  }
 }));
 
 function Home() {
@@ -51,47 +52,53 @@ function Home() {
     localActions.getSongs();
   }, []);
 
+
   return (
-    <div>
-      {!globalState.isApiLoading ? (
-        <div>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <MusicNoteSharpIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                TOP POP
+    <div className="site">
+      <div className="siteContent">
+        <div className="main">
+          {!globalState.isApiLoading ? (
+            <div>
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                  <Avatar className={classes.avatar}>
+                    <MusicNoteSharpIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    TOP POP
               </Typography>
-              <ButtonGroup
-                className={classes.button}
-                color="primary"
-                aria-label="outlined primary button group"
-              >
-                <Button onClick={() => {
-                  localActions.sortAsc()
-                }}>Sort ascending</Button>
-                <Button onClick={() => {
-                  localActions.sortDes()
-                }}>Sort descending</Button>
-              </ButtonGroup>
-            </div>
-          </Container>
-          <Grid container spacing={1} style={{ padding: 24 }}>
-            {globalState.songs.map((currentSong) => (
-              <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
-                <MyModal song={currentSong} />
+                  <ButtonGroup
+                    className={classes.button}
+                    color="primary"
+                    aria-label="outlined primary button group"
+                  >
+                    <Button onClick={() => {
+                      localActions.sortAsc()
+                    }}>Sort ascending</Button>
+                    <Button onClick={() => {
+                      localActions.sortDes()
+                    }}>Sort descending</Button>
+                  </ButtonGroup>
+                </div>
+              </Container>
+              <Grid container spacing={1} style={{ padding: 24 }}>
+                {globalState.songs.map((currentSong) => (
+                  <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
+                    <MyModal song={currentSong} />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
+            </div>
+          ) : (
+              <Loader />
+            )}
         </div>
-      ) : (
-          <Loader />
-        )}
+      </div>
       <Footer />
     </div>
   );
+
 }
 
 export default Home;

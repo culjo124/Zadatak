@@ -1,6 +1,6 @@
 import * as types from "../actions/actionTypes";
 
-const initialState = { songs: [], isApiLoading: true };
+const initialState = { songs: [], isApiLoading: false };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {

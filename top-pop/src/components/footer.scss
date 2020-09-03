@@ -1,17 +1,25 @@
-@media(min-width:468px){
+.container-1{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    //position: absolute;
+    //bottom: 0;
+  }
+
+.container-1 div{
+  padding:10px;
+}
+.box-1{
+  flex: 5
+}
+
+@media(max-width:468px){
     .container-1{
       display:flex;
+      flex-direction: column;
     }
   
   .container-1 div{
     padding:10px;
-  }
-  
-  .box-1{
-    flex:3;
-  }
-  
-  .box-2{
-    flex:1;
   }
 }

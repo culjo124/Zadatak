@@ -13,6 +13,7 @@ import * as actions from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/loader";
 import Footer from "../components/footer";
+import TextField from '@material-ui/core/TextField';
 import "./home.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +53,6 @@ function Home() {
     localActions.getSongs();
   }, []);
 
-
   return (
     <div className="site">
       <div className="siteContent">
@@ -89,6 +89,19 @@ function Home() {
                   </Grid>
                 ))}
               </Grid>
+              <ButtonGroup
+                className={classes.button}
+                color="primary"
+                aria-label="outlined primary button group"
+              >
+                <Button onClick={() => {
+                  localActions.sortAsc()
+                }}>Add to local storage</Button>
+                <Button onClick={() => {
+                  localActions.sortAsc()
+                }}>Clear local storage</Button>
+              </ButtonGroup>
+              <div><TextField id="standard-basic" label="Standard" /></div>
             </div>
           ) : (
               <Loader />
@@ -96,7 +109,7 @@ function Home() {
         </div>
       </div>
       <Footer />
-    </div>
+    </div >
   );
 
 }

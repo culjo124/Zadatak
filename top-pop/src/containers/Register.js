@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import validate from "validate.js"
+import { Link } from 'react-router-dom'
 
 function Register() {
     const formref = useRef();
@@ -76,6 +77,7 @@ function Register() {
             </form>
             <div className="createAccount">
                 <button onClick={onClick}>Create Account</button>
+                <Link to='/home' ><button>Home</button></Link>
             </div>
 
         </div>

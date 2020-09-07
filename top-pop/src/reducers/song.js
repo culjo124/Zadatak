@@ -1,6 +1,6 @@
 import * as types from "../actions/actionTypes";
 
-const initialState = { songs: [], isApiLoading: false, comments: [localStorage.getItem('comments')] };
+const initialState = { songs: [], isApiLoading: false, comments: localStorage.getItem('comments') };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -17,10 +17,20 @@ export default function reducer(state = initialState, action) {
             return { ...state, isApiLoading: action.apiLoading }
 
         case types.ADD_TO_STORAGE:
-            return { ...state, comments: state.comments.concat(action.comment) }
+            return state.comments === null || state.comments === "" ? { ...state, comments: action.comment } :
+                { ...state, comments: state.comments.concat("," + action.comment) }
 
         case types.CLEAR_STORAGE:
-            return { ...state, comments: [localStorage.getItem('comments')] }
+            return { ...state, comments: "" }
+
+        case types.REMOVE_FROM_STORAGE:
+            return action.index === 0 || action.index === action.length ? {
+                ...state, comments: state.comments.split(",").splice(0, action.index) +
+                    state.comments.split(",").splice(action.index + 1, action.length)
+            } : {
+                    ...state, comments: state.comments.split(",").splice(0, action.index) + "," +
+                        state.comments.split(",").splice(action.index + 1, action.length)
+                }
 
         default:
             return state

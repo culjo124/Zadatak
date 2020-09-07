@@ -32,7 +32,7 @@ export function getSongs() {
 }
 
 export const addToStorage = comment => {
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
 
         try {
 
@@ -45,7 +45,7 @@ export const addToStorage = comment => {
 }
 
 export function clearStorage() {
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
 
         try {
 
@@ -56,4 +56,18 @@ export function clearStorage() {
             console.log(error)
         }
     };
+}
+
+export function removeFromStorage(comment) {
+    return (dispatch, getState) => {
+        try {
+
+            let index = getState().song.comments.split(",").indexOf(comment)
+            let length = getState().song.comments.split(",").length
+            dispatch({ type: types.REMOVE_FROM_STORAGE, index, length })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

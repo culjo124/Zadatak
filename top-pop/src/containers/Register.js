@@ -7,24 +7,25 @@ function Register() {
 
     var constraints = {
         email: {
-            presence: true,
-            email: true
+            presence: { true: true, message: "^This field is required" },
+            email: { true: true, message: "^This is not a valide email" }
         },
         password: {
-            presence: true,
+            presence: { true: true, message: "^This field is required" },
             length: {
-                minimum: 6
+                minimum: 6,
+                message: "^Password needs to be at least 6 characters"
             }
         },
         confirmPassword: {
-            presence: true,
+            presence: { true: true, message: "^This field is required" },
             equality: {
                 attribute: "password",
-                message: "^The passwords does not match"
+                message: "^Password doesn't match"
             }
         },
         fullName: {
-            presence: true
+            presence: { true: true, message: "^This field is required" }
         }
     }
 

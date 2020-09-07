@@ -30,3 +30,30 @@ export function getSongs() {
         }
     };
 }
+
+export const addToStorage = comment => {
+    return async (dispatch, getState) => {
+
+        try {
+
+            dispatch({ type: types.ADD_TO_STORAGE, comment: comment })
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
+}
+
+export function clearStorage() {
+    return async (dispatch, getState) => {
+
+        try {
+
+            localStorage.clear()
+            dispatch({ type: types.CLEAR_STORAGE })
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
+}

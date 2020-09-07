@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -34,24 +34,36 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
-
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
 
   const localActions = {
     sortAsc: () => dispatch(actions.song.sortAsc()),
     sortDes: () => dispatch(actions.song.sortDes()),
     getSongs: () => dispatch(actions.song.getSongs()),
-
+    clearStorage: () => dispatch(actions.song.clearStorage())
   };
 
   const globalState = {
     songs: useSelector(state => state.song.songs),
-    isApiLoading: useSelector(state => state.song.isApiLoading)
+    isApiLoading: useSelector(state => state.song.isApiLoading),
+    comments: useSelector(state => state.song.comments)
   };
 
   useEffect(() => {
     localActions.getSongs();
   }, []);
+
+  useEffect(() => localStorage.setItem('comments', globalState.comments), [globalState.comments])
+
+  function addToStorage() {
+    dispatch(actions.song.addToStorage(text))
+    setText("")
+  }
+
+  function handleChange(e) {
+    setText(e.target.value)
+  }
 
   return (
     <div className="site">
@@ -95,13 +107,22 @@ function Home() {
                 aria-label="outlined primary button group"
               >
                 <Button onClick={() => {
-                  localActions.sortAsc()
+                  addToStorage()
                 }}>Add to local storage</Button>
                 <Button onClick={() => {
-                  localActions.sortAsc()
+                  localActions.clearStorage()
                 }}>Clear local storage</Button>
               </ButtonGroup>
-              <div><TextField id="standard-basic" label="Standard" /></div>
+              <div><TextField id="standard-basic" label="Standard" value={text} onChange={handleChange} /></div>
+              {!globalState.comments ? null :
+                <Grid container spacing={1} style={{ padding: 24 }}>
+                  {console.log(globalState.comments)}
+                  {globalState.comments[0].split(",").map((currentComment) => (
+                    <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
+                      <Button>{currentComment}</Button>
+                    </Grid>
+                  ))}
+                </Grid>}
             </div>
           ) : (
               <Loader />

@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action) {
             return { ...state, comments: "" }
 
         case types.REMOVE_FROM_STORAGE:
-            return action.index === 0 || action.index === action.length ? {
+            return action.index === 0 || action.index === action.length - 1 ? {
                 ...state, comments: state.comments.split(",").splice(0, action.index) +
                     state.comments.split(",").splice(action.index + 1, action.length)
             } : {

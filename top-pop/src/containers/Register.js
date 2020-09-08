@@ -1,12 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import validate from "validate.js"
 import { Link } from 'react-router-dom'
 
 function Register() {
-    const formref = useRef();
     const [errors, setErrors] = useState({});
+    const [values, setValues] = useState({});
 
-    var constraints = {
+    const confirmPassConstraints = {
+        confirmPassword: {
+            presence: { true: true, message: "^This field is required" },
+            equality: {
+                attribute: "password",
+                message: "^Password doesn't match"
+            }
+        }
+    }
+
+    const constraints = {
         email: {
             presence: { true: true, message: "^This field is required" },
             email: { true: true, message: "^This is not a valide email" }
@@ -18,32 +28,75 @@ function Register() {
                 message: "^Password needs to be at least 6 characters"
             }
         },
-        confirmPassword: {
-            presence: { true: true, message: "^This field is required" },
-            equality: {
-                attribute: "password",
-                message: "^Password doesn't match"
-            }
-        },
         fullName: {
             presence: { true: true, message: "^This field is required" }
         }
     }
 
     function onClick() {
-        validate(formref.current, constraints) ? setErrors(validate(formref.current, constraints)) : alert("SUCCESS")
+        validate(values, constraints) ? setErrors(validate(values, constraints)) : alert(
+            "Full name: " + values.fullName + "\nEmail: " + values.email
+        )
+    }
+    function handleChange(e) {
+        switch (e.target.name) {
+            case "fullName":
+                setValues({ ...values, fullName: e.target.value })
+                break
+            case "email":
+                setValues({ ...values, email: e.target.value })
+                break
+            case "password":
+                setValues({ ...values, password: e.target.value })
+                break
+            case "confirmPassword":
+                setValues({ ...values, confirmPassword: e.target.value })
+                break
+            default:
+                break
+        }
+    }
+
+    function handleBlur(e) {
+        switch (e.target.name) {
+            case "fullName":
+                setErrors({ ...errors, fullName: validate.single(values.fullName, constraints.fullName) })
+                break
+
+            case "email":
+                setErrors({ ...errors, email: validate.single(values.email, constraints.email) })
+                break
+
+            case "password":
+                setErrors({ ...errors, password: validate.single(values.password, constraints.password) })
+                break
+
+            case "confirmPassword":
+                const result = validate({ password: values.password, confirmPassword: values.confirmPassword }, confirmPassConstraints)
+                if (result === undefined) {
+                    setErrors({ ...errors, confirmPassword: result })
+                } else {
+                    setErrors({ ...errors, confirmPassword: result.confirmPassword })
+                }
+                break
+
+            default:
+                break
+        }
     }
 
     return (
         <div className="form-wrapper">
             <h1>Create Account</h1>
-            <form ref={formref}>
+            <form >
                 <div className="fullName">
                     <label htmlFor="fullName">Full Name</label>
                     <input
                         placeholder="Full name"
                         type="text"
                         name="fullName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
                     {errors.fullName && (<span>{errors.fullName}</span>)}
                 </div>
@@ -53,6 +106,8 @@ function Register() {
                         placeholder="email"
                         type="text"
                         name="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
                     {errors.email && (<span>{errors.email}</span>)}
                 </div>
@@ -62,6 +117,8 @@ function Register() {
                         placeholder="password"
                         type="password"
                         name="password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
                     {errors.password && (<span>{errors.password}</span>)}
                 </div>
@@ -71,6 +128,8 @@ function Register() {
                         placeholder="password"
                         type="password"
                         name="confirmPassword"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
                     {errors.confirmPassword && (<span>{errors.confirmPassword}</span>)}
                 </div>

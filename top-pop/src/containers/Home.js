@@ -36,35 +36,46 @@ function Home() {
   const classes = useStyles();
   const [text, setText] = useState("");
   const dispatch = useDispatch();
+  const [comments, setComments] = useState(localStorage.getItem('comments'))
 
   const localActions = {
     sortAsc: () => dispatch(actions.song.sortAsc()),
     sortDes: () => dispatch(actions.song.sortDes()),
     getSongs: () => dispatch(actions.song.getSongs()),
-    clearStorage: () => dispatch(actions.song.clearStorage())
   };
 
   const globalState = {
     songs: useSelector(state => state.song.songs),
     isApiLoading: useSelector(state => state.song.isApiLoading),
-    comments: useSelector(state => state.song.comments)
   };
 
   useEffect(() => {
     localActions.getSongs();
   }, []);
 
-  useEffect(() => localStorage.setItem('comments', globalState.comments), [globalState.comments])
+  useEffect(() => localStorage.setItem('comments', comments), [comments])
 
   function addToStorage() {
     if (text.length > 0) {
-      dispatch(actions.song.addToStorage(text))
+      comments === null || comments === "" ? setComments(text) :
+        setComments(comments.concat("," + text))
       setText("")
     }
   }
 
+  function clearStorage() {
+    setComments("")
+  }
+
   function removeFromStorage(text) {
-    dispatch(actions.song.removeFromStorage(text))
+    const index = comments.split(",").indexOf(text)
+    const length = comments.split(",").length
+
+    index === 0 || index === length - 1 ?
+      setComments(comments.split(",").splice(0, index) +
+        comments.split(",").splice(index + 1, length)
+      ) : setComments(comments.split(",").splice(0, index) + "," +
+        comments.split(",").splice(index + 1, length))
   }
 
   function handleChange(e) {
@@ -116,13 +127,13 @@ function Home() {
                   addToStorage()
                 }}>Add to local storage</Button>
                 <Button onClick={() => {
-                  localActions.clearStorage()
+                  clearStorage()
                 }}>Clear local storage</Button>
               </ButtonGroup>
               <div><TextField id="standard-basic" label="Standard" value={text} onChange={handleChange} /></div>
-              {globalState.comments === null ? null :
+              {comments === null || comments === "" ? null :
                 <Grid container spacing={1} style={{ padding: 24 }}>
-                  {globalState.comments.split(",").map((currentComment) => (
+                  {comments.split(",").map((currentComment) => (
                     <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
                       <Button variant="outlined" color="primary" onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
                     </Grid>

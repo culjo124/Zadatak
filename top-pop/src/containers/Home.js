@@ -57,8 +57,10 @@ function Home() {
   useEffect(() => localStorage.setItem('comments', globalState.comments), [globalState.comments])
 
   function addToStorage() {
-    dispatch(actions.song.addToStorage(text))
-    setText("")
+    if (text.length > 0) {
+      dispatch(actions.song.addToStorage(text))
+      setText("")
+    }
   }
 
   function removeFromStorage(text) {

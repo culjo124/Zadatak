@@ -62,7 +62,6 @@ function Home() {
   }
 
   function removeFromStorage(text) {
-    console.log(text)
     dispatch(actions.song.removeFromStorage(text))
   }
 
@@ -119,13 +118,11 @@ function Home() {
                 }}>Clear local storage</Button>
               </ButtonGroup>
               <div><TextField id="standard-basic" label="Standard" value={text} onChange={handleChange} /></div>
-              {console.log(globalState.comments)}
               {globalState.comments === null ? null :
                 <Grid container spacing={1} style={{ padding: 24 }}>
-                  {console.log(globalState.comments)}
                   {globalState.comments.split(",").map((currentComment) => (
                     <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
-                      <Button onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
+                      <Button variant="outlined" color="primary" onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
                     </Grid>
                   ))}
                 </Grid>}

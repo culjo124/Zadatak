@@ -1,0 +1,53 @@
+h1 {
+    font-size: 73px;
+    background-color: rgb(48, 45, 45);
+    border-radius: 25px;
+    padding: 10px;
+}
+
+body {
+    background-color: rgb(48, 45, 45);
+    color: white;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 50px;
+}
+
+.form-wrapper {
+    background-color: rgb(107, 96, 96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+}
+
+label{
+    padding: 10px;
+}
+input{
+    padding: 10px;
+    background: transparent;
+    align-self: center;
+    border-radius: 25px;
+}
+.input{
+    display: flex;
+    flex-direction: column;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+.createAccount{
+    padding: 10px;
+    display: flex;
+}
+button {
+    padding: 10px;
+    background-color: rgb(107, 96, 96);
+    color: white;
+    border-radius: 25px;
+}
+span{
+    color: red;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import validate from "validate.js"
 import { Link } from 'react-router-dom'
+import "./register.css"
 
 function Register() {
     const [errors, setErrors] = useState({});
@@ -43,15 +44,19 @@ function Register() {
             case "fullName":
                 setValues({ ...values, fullName: e.target.value })
                 break
+
             case "email":
                 setValues({ ...values, email: e.target.value })
                 break
+
             case "password":
                 setValues({ ...values, password: e.target.value })
                 break
+
             case "confirmPassword":
                 setValues({ ...values, confirmPassword: e.target.value })
                 break
+
             default:
                 break
         }
@@ -86,10 +91,10 @@ function Register() {
     }
 
     return (
-        <div className="form-wrapper">
+        <div className="form-wrapper" >
             <h1>Create Account</h1>
             <form >
-                <div className="fullName">
+                <div className="input">
                     <label htmlFor="fullName">Full Name</label>
                     <input
                         placeholder="Full name"
@@ -100,7 +105,7 @@ function Register() {
                     />
                     {errors.fullName && (<span>{errors.fullName}</span>)}
                 </div>
-                <div className="email">
+                <div className="input">
                     <label htmlFor="email">Email</label>
                     <input
                         placeholder="email"
@@ -111,7 +116,7 @@ function Register() {
                     />
                     {errors.email && (<span>{errors.email}</span>)}
                 </div>
-                <div className="password">
+                <div className="input">
                     <label htmlFor="password">Password</label>
                     <input
                         placeholder="password"
@@ -122,7 +127,7 @@ function Register() {
                     />
                     {errors.password && (<span>{errors.password}</span>)}
                 </div>
-                <div className="confirmPassword">
+                <div className="input">
                     <label htmlFor="confirmPassword">Confirm password</label>
                     <input
                         placeholder="password"
@@ -139,7 +144,7 @@ function Register() {
                 <Link to='/home' ><button>Home</button></Link>
             </div>
 
-        </div>
+        </div >
     );
 }
 

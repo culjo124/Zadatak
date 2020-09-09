@@ -30,10 +30,12 @@ img {
         height: 100px;
     }
 }
+
 .modal-up {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     img {
         width: 700px;
         height: 700px;

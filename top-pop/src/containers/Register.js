@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import validate from "validate.js"
 import { Link } from 'react-router-dom'
-import "./register.css"
+import "./register.scss"
 
 function Register() {
     const [errors, setErrors] = useState({});
@@ -132,6 +132,10 @@ function Register() {
                     <input
                         placeholder="password"
                         type="password"
+                        onPaste={e => {
+                            e.preventDefault()
+                            return false
+                        }}
                         name="confirmPassword"
                         onChange={handleChange}
                         onBlur={handleBlur}

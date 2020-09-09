@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import Home from "../containers/Home"
 import Register from "../containers/Register"
+import Gallery from "../containers/Gallery"
 
 import createRootReducer from "../reducers";
 
@@ -22,6 +23,7 @@ export default function Routes() {
             <BrowserRouter forceRefresh={true}>
                 <Route path="/" exact component={Register} />
                 <Route path="/home" exact component={Home} />
+                <Route path="/gallery" exact component={Gallery} />
             </BrowserRouter>
         </Provider>
 

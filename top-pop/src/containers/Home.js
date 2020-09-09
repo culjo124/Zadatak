@@ -25,10 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "red"
   },
   button: {
     alignItems: "center",
+    marginLeft: "25px"
+  },
+  text: {
+    marginLeft: "25px"
   }
 }));
 
@@ -58,7 +62,7 @@ function Home() {
   function addToStorage() {
     if (text.length > 0) {
       comments === null || comments === "" ? setComments(text) :
-        setComments(comments.concat("," + text))
+        setComments(comments.concat("\\\\" + text))
       setText("")
     }
   }
@@ -68,14 +72,14 @@ function Home() {
   }
 
   function removeFromStorage(text) {
-    const index = comments.split(",").indexOf(text)
-    const length = comments.split(",").length
+    const index = comments.split("\\\\").indexOf(text)
+    const length = comments.split("\\\\").length
 
     index === 0 || index === length - 1 ?
-      setComments(comments.split(",").splice(0, index) +
-        comments.split(",").splice(index + 1, length)
-      ) : setComments(comments.split(",").splice(0, index) + "," +
-        comments.split(",").splice(index + 1, length))
+      setComments(comments.split("\\\\").splice(0, index) +
+        comments.split("\\\\").splice(index + 1, length)
+      ) : setComments(comments.split("\\\\").splice(0, index) + "\\\\" +
+        comments.split("\\\\").splice(index + 1, length))
   }
 
   function handleChange(e) {
@@ -94,11 +98,11 @@ function Home() {
                   <Avatar className={classes.avatar}>
                     <MusicNoteSharpIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">
+                  <Typography variant="h5">
                     TOP POP
               </Typography>
                   <ButtonGroup
-                    className={classes.button}
+                    styles={{ color: "green" }}
                     color="primary"
                     aria-label="outlined primary button group"
                   >
@@ -130,10 +134,10 @@ function Home() {
                   clearStorage()
                 }}>Clear local storage</Button>
               </ButtonGroup>
-              <div><TextField id="standard-basic" label="Standard" value={text} onChange={handleChange} /></div>
+              <div><TextField className={classes.text} label="Standard" value={text} onChange={handleChange} /></div>
               {comments === null || comments === "" ? null :
                 <Grid container spacing={1} style={{ padding: 24 }}>
-                  {comments.split(",").map((currentComment) => (
+                  {comments.split("\\\\").map((currentComment) => (
                     <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
                       <Button variant="outlined" color="primary" onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
                     </Grid>

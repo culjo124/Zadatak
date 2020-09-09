@@ -1,0 +1,42 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img {
+    flex: 1 1 auto; 
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(107, 96, 96);
+    text-align: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.modal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.small-list{
+    display: flex;
+    flex-wrap: wrap;
+    img {
+        padding: 5px;
+        width: 100px;
+        height: 100px;
+    }
+}
+.modal-up {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+        width: 700px;
+        height: 700px;
+    }
+}
+

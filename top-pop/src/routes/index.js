@@ -6,7 +6,7 @@ import ReduxThunk from "redux-thunk";
 import Home from "../containers/Home"
 import Register from "../containers/Register"
 import Gallery from "../containers/Gallery"
-
+import logger from 'redux-logger'
 import createRootReducer from "../reducers";
 
 const preloadedState = undefined;
@@ -14,7 +14,7 @@ const preloadedState = undefined;
 const store = createStore(
     createRootReducer(),
     preloadedState,
-    compose(applyMiddleware(ReduxThunk))
+    compose(applyMiddleware(ReduxThunk), applyMiddleware(logger))
 );
 
 export default function Routes() {

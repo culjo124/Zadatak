@@ -25,10 +25,20 @@ img {
     display: flex;
     flex-wrap: wrap;
     padding-left: 30px;
+    padding-bottom: 10px;
     img {
         padding: 5px;
         width: 100px;
         height: 100px;
+    }
+}
+.modal-img {
+    height: 100%;
+}
+
+.button-x {
+    button {
+        background-color: red;
     }
 }
 
@@ -38,8 +48,8 @@ img {
     align-items: center;
     flex-wrap: wrap;
     img {
-        width: 650px;
-        height: 650px;
+        width: 600px;
+        height: 600px;
     }
 }
 

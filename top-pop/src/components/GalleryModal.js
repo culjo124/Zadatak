@@ -43,6 +43,9 @@ export default function GalleryModal(props) {
                 aria-describedby="simple-modal-description"
             >
                 <div className="modal-img">
+                    <div className="button-x">
+                        <button onClick={handleClose}>X</button>
+                    </div>
                     <div className="modal-up">
                         <button onClick={handleLeft}>{"<"}</button>
                         <img src={img} alt="img" />

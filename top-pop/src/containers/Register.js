@@ -146,6 +146,7 @@ function Register() {
             <div className="createAccount">
                 <button onClick={onClick}>Create Account</button>
                 <Link to='/home' ><button>Home</button></Link>
+                <Link to='/gallery' ><button>Gallery</button></Link>
             </div>
 
         </div >

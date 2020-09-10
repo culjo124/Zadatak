@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import validate from "validate.js"
 import { Link } from 'react-router-dom'
-import "./register.scss"
+import "../styles/register.scss"
 
 function Register() {
     const [errors, setErrors] = useState({});

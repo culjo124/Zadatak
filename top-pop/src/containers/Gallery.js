@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GalleryModal from "../components/GalleryModal"
-import "./gallery.scss"
+import "../styles/gallery.scss"
+import Loader from "../components/loader";
 
 function Gallery() {
 
@@ -25,7 +26,7 @@ function Gallery() {
 
     return (< div className="grid">
         {images.length > 0 ? images.map(image => <GalleryModal key={image} image={image} images={images} />
-        ) : "Loading..."
+        ) : <Loader />
         }
     </div >)
 }

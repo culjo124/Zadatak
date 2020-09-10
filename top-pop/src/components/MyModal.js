@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  par: {
+    color: "red",
+  }
 }));
 
 function getModalStyle() {
@@ -52,17 +55,15 @@ export default function MyModal(props) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id="simple-modal-title">Song details</h2>
-          <p id="simple-modal-description">
+          <h2 >Song details</h2>
+          <p className={classes.par}>
             Rang on list : {props.song.position}
           </p>
-          <p id="simple-modal-description">Title : {props.song.title}</p>
-          <p id="simple-modal-description">Artist : {props.song.artist.name}</p>
-          <p id="simple-modal-description">
+          <p className={classes.par}>Title : {props.song.title}</p>
+          <p className={classes.par}>Artist : {props.song.artist.name}</p>
+          <p className={classes.par}>
             Duration : {Math.floor(props.song.duration / 60)}:
             {props.song.duration % 60 < 10
               ? "0" + (props.song.duration % 60)

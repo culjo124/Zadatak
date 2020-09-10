@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/loader";
 import Footer from "../components/footer";
 import TextField from '@material-ui/core/TextField';
-import "./home.scss";
+import "../styles/home.scss";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,6 +55,7 @@ function Home() {
 
   useEffect(() => {
     localActions.getSongs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => localStorage.setItem('comments', comments), [comments])

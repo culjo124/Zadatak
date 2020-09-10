@@ -34,7 +34,7 @@ export default function GalleryModal(props) {
 
     return (
         <div className="modal" id="modal">
-            <div key={props.image} className="img" onClick={handleOpen} >
+            <div className="img" onClick={handleOpen} >
                 <img src={props.image} alt="img" /></div>
             <Modal
                 open={open}

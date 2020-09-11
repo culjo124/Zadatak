@@ -21,15 +21,28 @@ export default function GalleryModal(props) {
     }
 
     function handleLeft() {
+        let element = document.getElementsByClassName("active")[0]
+        if (element) {
+            element.className = "in-active"
+        }
         let result = currentImage - 1
-        if (result === -1) { dispatch(actions.image.setCurrentImage(images.length - 1)) }
+        if (result === -1) {
+            document.getElementById(images[images.length - 1]).className = "active"
+            dispatch(actions.image.setCurrentImage(images.length - 1))
+        }
         else {
+            document.getElementById(images[result]).className = "active"
             dispatch(actions.image.setCurrentImage(result))
         }
     }
 
     function handleRight() {
+        let element = document.getElementsByClassName("active")[0]
+        if (element) {
+            element.className = "in-active"
+        }
         let result = currentImage + 1
+        document.getElementById(images[result]).className = "active"
         dispatch(actions.image.setCurrentImage(result % images.length))
     }
 
@@ -62,7 +75,7 @@ export default function GalleryModal(props) {
                         <img src={images[currentImage]} alt="img" />
                         <button onClick={handleRight}>{">"}</button></div>
                     <div ref={smallListRef} className="small-list">{images.map
-                        (image => <img className="in-active" key={image} onClick={imageClick} src={image} alt="img" />)}
+                        (image => <img className="in-active" id={image} key={image} onClick={imageClick} src={image} alt="img" />)}
                     </div>
                 </div>
             </Modal>

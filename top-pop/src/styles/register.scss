@@ -8,10 +8,7 @@ h1 {
 
 body {
     background-color: rgb(48, 45, 45);
-    color: white;
-    padding-left: 150px;
-    padding-right: 150px;
-    padding-top: 50px;
+    padding: 50px;
 }
 
 .form-wrapper {
@@ -21,7 +18,7 @@ body {
     align-items: center;
     border-radius: 25px;
     border: solid;
-    min-width: 500px;
+    min-width: 400px;
 }
 
 label{
@@ -58,5 +55,7 @@ button {
     border-radius: 25px;
 }
 span{
+    font-size: 20px;
     color: red;
+    font-weight: bolder;
 }

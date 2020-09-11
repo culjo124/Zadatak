@@ -23,15 +23,26 @@ img {
 
 .small-list{
     display: flex;
-    flex-wrap: wrap;
     padding-left: 30px;
     padding-bottom: 10px;
+    overflow: scroll; 
     img {
         padding: 5px;
         width: 100px;
         height: 100px;
     }
+    img:hover{
+        padding: 10px;
+        width: 90px;
+        height: 90px;
+    }
+    .active {
+        padding: 10px;
+        width: 90px;
+        height: 90px;
+    }
 }
+
 .modal-img {
     height: 100%;
 }

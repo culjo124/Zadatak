@@ -31,6 +31,13 @@ function Register() {
         },
         fullName: {
             presence: { true: true, message: "^This field is required" }
+        },
+        confirmPassword: {
+            presence: { true: true, message: "^This field is required" },
+            equality: {
+                attribute: "password",
+                message: "^Password doesn't match"
+            }
         }
     }
 

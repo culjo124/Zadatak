@@ -1,35 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Modal from "@material-ui/core/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../actions";
 
 export default function GalleryModal(props) {
     const [open, setOpen] = useState(false);
-    const [img, setImg] = useState(props.image);
+    const dispatch = useDispatch();
+    const images = useSelector(state => state.image.images)
+    const currentImage = useSelector(state => state.image.currentImage)
+    const smallListRef = useRef("small-list")
 
     const handleClose = () => {
         setOpen(false);
     }
 
-    const handleOpen = () => {
+    const handleOpen = (e) => {
+        let result = images.indexOf(e.target.src)
+        dispatch(actions.image.setCurrentImage(result))
         setOpen(true);
     }
 
     function handleLeft() {
-        let result = (props.images.indexOf(img) - 1) % props.images.length
-        if (result === -1) {
-            setImg(props.images[props.images.length - 1])
-        } else {
-            setImg(props.images[result])
+        let result = currentImage - 1
+        if (result === -1) { dispatch(actions.image.setCurrentImage(images.length - 1)) }
+        else {
+            dispatch(actions.image.setCurrentImage(result))
         }
     }
 
     function handleRight() {
-        let result = (props.images.indexOf(img) + 1) % props.images.length
-        setImg(props.images[result])
+        let result = currentImage + 1
+        dispatch(actions.image.setCurrentImage(result % images.length))
     }
 
-    function imageClick(image) {
-        let result = props.images.indexOf(image)
-        setImg(props.images[result])
+    function imageClick(e) {
+        let element = document.getElementsByClassName("active")[0]
+        if (element) {
+            element.className = "in-active"
+        }
+        e.target.className = "active"
+        let result = images.indexOf(e.target.src)
+        dispatch(actions.image.setCurrentImage(result))
     }
 
     return (
@@ -48,10 +59,10 @@ export default function GalleryModal(props) {
                     </div>
                     <div className="modal-up">
                         <button onClick={handleLeft}>{"<"}</button>
-                        <img src={img} alt="img" />
+                        <img src={images[currentImage]} alt="img" />
                         <button onClick={handleRight}>{">"}</button></div>
-                    <div className="small-list">{props.images.map
-                        (image => <img key={image} onClick={() => imageClick(image)} src={image} alt="img" />)}
+                    <div ref={smallListRef} className="small-list">{images.map
+                        (image => <img className="in-active" key={image} onClick={imageClick} src={image} alt="img" />)}
                     </div>
                 </div>
             </Modal>

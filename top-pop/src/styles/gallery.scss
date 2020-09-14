@@ -1,6 +1,7 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
+    height: inherit;
 }
 
 .img {
@@ -41,10 +42,6 @@ img {
         width: 90px;
         height: 90px;
     }
-}
-
-.modal-img {
-    height: 100%;
 }
 
 .button-x {

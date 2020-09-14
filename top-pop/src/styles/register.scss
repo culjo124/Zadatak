@@ -6,11 +6,6 @@ h1 {
     text-align: center;
 }
 
-body {
-    background-color: rgb(48, 45, 45);
-    padding: 50px;
-}
-
 .form-wrapper {
     background-color: rgb(107, 96, 96);
     display: flex;
@@ -58,4 +53,44 @@ span{
     font-size: 20px;
     color: red;
     font-weight: bolder;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
+    segoe ui, arial, sans-serif;
+  background: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+#root {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.simple-trans-main > div {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  will-change: transform, opacity;
 }

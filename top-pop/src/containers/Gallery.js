@@ -4,6 +4,7 @@ import "../styles/gallery.scss"
 import Loader from "../components/loader";
 import * as actions from "../actions";
 import { useSelector, useDispatch } from "react-redux";
+import Header from "../components/header"
 
 function Gallery() {
     const dispatch = useDispatch();
@@ -19,9 +20,10 @@ function Gallery() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return (< div className="grid">
-        {!imagesLoading ? images.map(image => <GalleryModal key={image} image={image} />) : <Loader />}
-    </div >)
+    return (
+        < div className="grid">
+            {!imagesLoading ? images.map(image => <GalleryModal key={image} image={image} />) : <Loader />}
+        </div >)
 }
 
 export default Gallery;

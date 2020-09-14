@@ -98,65 +98,66 @@ function Register() {
     }
 
     return (
-        <div className="form-wrapper" >
-            <h1>Create Account</h1>
-            <form >
-                <div className="input">
-                    <label htmlFor="fullName">Full Name</label>
-                    <input
-                        placeholder="Full name"
-                        type="text"
-                        name="fullName"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.fullName && (<span>{errors.fullName}</span>)}
+        <div>
+            <div className="form-wrapper" >
+                <h1>Create Account</h1>
+                <form >
+                    <div className="input">
+                        <label htmlFor="fullName">Full Name</label>
+                        <input
+                            placeholder="Full name"
+                            type="text"
+                            name="fullName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.fullName && (<span>{errors.fullName}</span>)}
+                    </div>
+                    <div className="input">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            placeholder="email"
+                            type="text"
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.email && (<span>{errors.email}</span>)}
+                    </div>
+                    <div className="input">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            placeholder="password"
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.password && (<span>{errors.password}</span>)}
+                    </div>
+                    <div className="input">
+                        <label htmlFor="confirmPassword">Confirm password</label>
+                        <input
+                            placeholder="password"
+                            type="password"
+                            onPaste={e => {
+                                e.preventDefault()
+                                return false
+                            }}
+                            name="confirmPassword"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {errors.confirmPassword && (<span>{errors.confirmPassword}</span>)}
+                    </div>
+                </form>
+                <div className="createAccount">
+                    <button onClick={onClick}>Create Account</button>
+                    <Link to='/home' ><button>Home</button></Link>
+                    <Link to='/gallery' ><button>Gallery</button></Link>
                 </div>
-                <div className="input">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        placeholder="email"
-                        type="text"
-                        name="email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.email && (<span>{errors.email}</span>)}
-                </div>
-                <div className="input">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        placeholder="password"
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.password && (<span>{errors.password}</span>)}
-                </div>
-                <div className="input">
-                    <label htmlFor="confirmPassword">Confirm password</label>
-                    <input
-                        placeholder="password"
-                        type="password"
-                        onPaste={e => {
-                            e.preventDefault()
-                            return false
-                        }}
-                        name="confirmPassword"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.confirmPassword && (<span>{errors.confirmPassword}</span>)}
-                </div>
-            </form>
-            <div className="createAccount">
-                <button onClick={onClick}>Create Account</button>
-                <Link to='/home' ><button>Home</button></Link>
-                <Link to='/gallery' ><button>Gallery</button></Link>
-            </div>
-
-        </div >
+            </div >
+        </div>
     );
 }
 

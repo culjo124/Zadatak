@@ -14,8 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/loader";
 import Footer from "../components/footer";
 import TextField from '@material-ui/core/TextField';
-import "../styles/home.scss";
-import { Spring } from 'react-spring/renderprops';
+import Header from '../components/header'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -89,79 +88,71 @@ function Home() {
   }
 
   return (
-    <Spring from={{ marginLeft: -2000 }}
-      to={{ marginLeft: 0 }}
-      config={{ delay: 1000, duration: 1000 }}
-    >
-      { props => (
-        <div className="site" style={props}>
-          <div className="siteContent">
-            <div className="main">
-              {!globalState.isApiLoading ? (
-                <div>
-                  <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                      <Avatar className={classes.avatar}>
-                        <MusicNoteSharpIcon />
-                      </Avatar>
-                      <Typography variant="h5">
-                        TOP POP
+    <div className="site">
+      <div className="siteContent">
+        <div className="main">
+          {!globalState.isApiLoading ? (
+            <div >
+              <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                  <Avatar className={classes.avatar}>
+                    <MusicNoteSharpIcon />
+                  </Avatar>
+                  <Typography variant="h5">
+                    TOP POP
                   </Typography>
-                      <ButtonGroup
-                        styles={{ color: "green" }}
-                        color="primary"
-                        aria-label="outlined primary button group"
-                      >
-                        <Button onClick={() => {
-                          localActions.sortAsc()
-                        }}>Sort ascending</Button>
-                        <Button onClick={() => {
-                          localActions.sortDes()
-                        }}>Sort descending</Button>
-                      </ButtonGroup>
-                    </div>
-                  </Container>
-                  <Grid container spacing={1} style={{ padding: 24 }}>
-                    {globalState.songs.map((currentSong) => (
-                      <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
-                        <MyModal song={currentSong} />
-                      </Grid>
-                    ))}
-                  </Grid>
                   <ButtonGroup
-                    className={classes.button}
+                    styles={{ color: "green" }}
                     color="primary"
                     aria-label="outlined primary button group"
                   >
                     <Button onClick={() => {
-                      addToStorage()
-                    }}>Add to local storage</Button>
+                      localActions.sortAsc()
+                    }}>Sort ascending</Button>
                     <Button onClick={() => {
-                      clearStorage()
-                    }}>Clear local storage</Button>
+                      localActions.sortDes()
+                    }}>Sort descending</Button>
                   </ButtonGroup>
-                  <div><TextField className={classes.text} label="Standard" value={text} onChange={handleChange} /></div>
-                  {comments === null || comments === "" ? null :
-                    <Grid container spacing={1} style={{ padding: 24 }}>
-                      {comments.split("\\\\").map((currentComment) => (
-                        <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
-                          <Button variant="outlined" color="primary" onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
-                        </Grid>
-                      ))}
-                    </Grid>}
                 </div>
-              ) : (
-                  <Loader />
-                )}
+              </Container>
+              <Grid container spacing={1} style={{ padding: 24 }}>
+                {globalState.songs.map((currentSong) => (
+                  <Grid item xs={12} sm={6} lg={4} xl={3} key={currentSong.id}>
+                    <MyModal song={currentSong} />
+                  </Grid>
+                ))}
+              </Grid>
+              <ButtonGroup
+                className={classes.button}
+                color="primary"
+                aria-label="outlined primary button group"
+              >
+                <Button onClick={() => {
+                  addToStorage()
+                }}>Add to local storage</Button>
+                <Button onClick={() => {
+                  clearStorage()
+                }}>Clear local storage</Button>
+              </ButtonGroup>
+              <div><TextField className={classes.text} label="Standard" value={text} onChange={handleChange} /></div>
+              {comments === null || comments === "" ? null :
+                <Grid container spacing={1} style={{ padding: 24 }}>
+                  {comments.split("\\\\").map((currentComment) => (
+                    <Grid item xs={12} sm={6} lg={4} xl={3} key={currentComment}>
+                      <Button variant="outlined" color="primary" onClick={() => removeFromStorage(currentComment)}>{currentComment}</Button>
+                    </Grid>
+                  ))}
+                </Grid>}
             </div>
-          </div>
-          <Footer />
-        </div >
-      )}
-    </Spring>
+          ) : (
+              <Loader />
+            )}
+        </div>
+      </div>
+      <Footer />
+    </div >
   );
-
 }
 
 export default Home;

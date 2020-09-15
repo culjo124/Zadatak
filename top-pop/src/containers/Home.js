@@ -41,7 +41,6 @@ function Home() {
   const dispatch = useDispatch();
   const [comments, setComments] = useState(localStorage.getItem('comments'))
   //promjena
-  //promjena2
 
   const localActions = {
     sortAsc: () => dispatch(actions.song.sortAsc()),

@@ -4,7 +4,6 @@ import "../styles/gallery.scss"
 import Loader from "../components/loader";
 import * as actions from "../actions";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../components/header"
 
 function Gallery() {
     const dispatch = useDispatch();

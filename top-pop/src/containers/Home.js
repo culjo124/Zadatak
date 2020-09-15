@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/loader";
 import Footer from "../components/footer";
 import TextField from '@material-ui/core/TextField';
-import Header from '../components/header'
 
 const useStyles = makeStyles((theme) => ({
   paper: {

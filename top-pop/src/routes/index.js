@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { applyMiddleware, compose, createStore } from "redux";
 import { Provider } from "react-redux";
@@ -18,28 +18,34 @@ const store = createStore(
     compose(applyMiddleware(ReduxThunk), applyMiddleware(logger))
 );
 
-const pages = [
-    ({ style }) => <animated.div style={{ ...style, background: 'lightpink' }}><Register /></animated.div>,
-    ({ style }) => <animated.div style={{ ...style, background: 'lightblue' }}><Home /></animated.div>,
-    ({ style }) => <animated.div style={{ ...style, background: 'lightgreen' }}><Gallery /></animated.div>,
-]
+const pages = {
+    Register: <Register />,
+    Home: <Home />,
+    Gallery: <Gallery />
+}
+const buttons = ["Register", "Home", "Gallery"]
 
 export default function Routes() {
-    const [index, set] = useState(0)
-    const onClick = useCallback(() => set(state => (state + 1) % pages.length), [])
+    const [index, setIndex] = useState("Register")
+    const onClick = (e) => setIndex(e.target.id)
     const transitions = useTransition(index, p => p, {
         from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
         enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-        leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-        config: { duration: 1000 }
+        leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
     })
+
     return (
         <Provider store={store}>
             <BrowserRouter forceRefresh={true}>
                 <div className="simple-trans-main" >
-                    <button onClick={onClick} style={{ color: "black", backgroundColor: "transparent", width: "100%" }}>Slide</button>
+                    {buttons.map((key) => {
+                        return <button id={key} key={key} onClick={onClick}
+                            style={{ color: "black", backgroundColor: "transparent" }}
+                        >{key}</button>
+                    })}
                     {transitions.map(({ item, props, key }) => {
-                        const Page = pages[item]
+                        const Page = ({ style }) =>
+                            <animated.div style={{ ...style, background: 'lightpink' }}>{pages[item]}</animated.div>
                         return <Page key={key} style={props} />
                     })}
                 </div>
